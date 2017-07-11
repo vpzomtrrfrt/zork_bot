@@ -4,7 +4,7 @@ var util = require('util');
 var tmp = require('tmp-promise');
 var fs = require('mz/fs');
 
-var MOVES_RE = /Moves: [0-9]+      [^ ]*\[0m[^\033]/g;
+var MOVES_RE = /Moves: [0-9]+\s+[^ ]+\[0m[^\033]/g;
 
 var COMMAND = process.env.ZORK_COMMAND || "zork1";
 
@@ -35,7 +35,7 @@ function runMove(move, save) {
 					var text = data;
 					var match;
 					while((match = MOVES_RE.exec(output)) !== null) {
-						var sub = output.substring(match.index+match[0].length, match.index+match[0].length+move.length);
+						var sub = output.substring(match.index+match[0].length-1, match.index+match[0].length+move.length-1);
 						if(sub === move) {
 							foundMove = match.index+match[0].length+move.length;
 							break;
