@@ -6,6 +6,8 @@ var fs = require('mz/fs');
 
 var MOVES_RE = /Moves: [0-9]+      [^ ]*\[0m/g;
 
+var COMMAND = process.env.ZORK_COMMAND || "zork1";
+
 function runMove(move, save) {
 	return Promise.all([tmp.file(), tmp.file()])
 	.then(function(files) {
@@ -20,7 +22,7 @@ function runMove(move, save) {
 				var output = "";
 				var loaded = false;
 				var response;
-				proc = pty.spawn('zork1', [], {});
+				proc = pty.spawn(COMMAND, [], {});
 				proc.on('data', function(data) {
 					output += data.toString();
 					if(!loaded && data.indexOf('>') > -1) {
@@ -79,7 +81,7 @@ function startGame() {
 	return tmp.file()
 	.then(function(file) {
 		return new Promise(function(resolve, reject) {
-			var proc = pty.spawn('zork1', [], {});
+			var proc = pty.spawn(COMMAND, [], {});
 			var output = "";
 			var done = false;
 			var loaded = false;
