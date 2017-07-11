@@ -4,7 +4,7 @@ var util = require('util');
 var tmp = require('tmp-promise');
 var fs = require('mz/fs');
 
-var MOVES_RE = /Moves: [0-9]+      [^ ]*\[0m/g;
+var MOVES_RE = /Moves: [0-9]+      [^ ]*\[0m[^\033]/g;
 
 var COMMAND = process.env.ZORK_COMMAND || "zork1";
 
