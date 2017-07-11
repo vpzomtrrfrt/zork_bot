@@ -65,7 +65,7 @@ reddit.getMe().then(function(me) {
 				return handleMessage(message)
 					.catch(console.error);
 			}));
-		})
+		}, console.error)
 		.then(function() {
 			console.log("complete");
 			setTimeout(mainLoop, 5000);
